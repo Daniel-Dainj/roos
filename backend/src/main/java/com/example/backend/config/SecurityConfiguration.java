@@ -2,7 +2,6 @@ package com.example.backend.config;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.example.backend.entity.RestBean;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
@@ -40,12 +39,12 @@ public class SecurityConfiguration {
                 .build();
     }
 
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(JSONObject.toJSONString(RestBean.success("登录成功")));
     }
 
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(JSONObject.toJSONString(RestBean.failure(401, exception.getMessage()))); // 权限不足需要重定向至权限校验页面
     }
